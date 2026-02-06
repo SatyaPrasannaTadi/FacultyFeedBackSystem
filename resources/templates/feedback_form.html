@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Faculty Feedback</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+    body {
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+       background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+        color: #333;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+    }
+
+    h2 {
+        text-align: center;
+        color: #1976d2;
+        margin-bottom: 15px;
+    }
+
+    .faculty-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        padding: 15px 20px;
+        width: 90%;
+        max-width: 700px;
+        margin-bottom: 20px;
+    }
+
+    .faculty-details {
+        flex: 1;
+        line-height: 1.4;
+    }
+
+    .faculty-image {
+        flex-shrink: 0;
+        margin-left: 20px;
+    }
+
+    .faculty-image img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #90caf9;
+    }
+
+    form {
+        background: #ffffff;
+        padding: 20px 25px;
+        border-radius: 12px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+        width: 90%;
+        max-width: 700px;
+    }
+
+    form p {
+        margin: 10px 0 6px;
+        font-weight: 500;
+        color: #444;
+    }
+
+    label {
+        margin-right: 10px;
+        font-size: 14px;
+    }
+
+    input[type="radio"] {
+        margin-right: 4px;
+    }
+
+    textarea {
+        width: 100%;
+        border-radius: 6px;
+        padding: 8px;
+        border: 1px solid #ccc;
+        resize: none;
+        font-family: "Poppins", sans-serif;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+
+    button {
+        margin-top: 15px;
+        padding: 10px 20px;
+        border: none;
+        background-color: #1976d2;
+        color: white;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        font-size: 15px;
+        display: block;
+        margin-left: auto;
+    }
+
+    button:hover {
+        background-color: #1565c0;
+    }
+
+    @media (max-width: 600px) {
+        .faculty-container {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .faculty-image {
+            margin-left: 0;
+            margin-top: 10px;
+        }
+
+        form {
+            padding: 15px;
+        }
+    }
+</style>
+    
+</head>
+
+<body>
+    <h2>Faculty Feedback</h2>
+
+    <!-- Faculty Info Section -->
+    <div class="faculty-container" th:if="${faculty}">
+        <div class="faculty-details">
+            
+            <p><b>Name:</b> <span th:text="${faculty.name}"></span></p>
+            <p><b>Subject:</b> <span th:text="${faculty.subject}"></span></p>
+            <p><b>Branch:</b> <span th:text="${faculty.branch}"></span></p>
+        </div>
+        <div class="faculty-image">
+            <img th:src="@{${faculty.imagePath}}" alt="Faculty Photo">
+        </div>
+    </div>
+
+    <!-- Feedback Form -->
+    <form th:action="@{/student/submitFeedback}" method="post">
+        <input type="hidden" name="facultyId" th:value="${faculty.id}" />
+
+        <p>1. How does the teacher explain the subject?</p>
+        <label><input type="radio" name="q1" value="Average" required> Average</label>
+        <label><input type="radio" name="q1" value="Good"> Good</label>
+        <label><input type="radio" name="q1" value="Very Good"> Very Good</label>
+        <label><input type="radio" name="q1" value="Excellent"> Excellent</label>
+        <br><br>
+
+        <p>2. How deeply does the teacher cover the subject matter?</p>
+        <label><input type="radio" name="q2" value="Average" required> Average</label>
+        <label><input type="radio" name="q2" value="Good"> Good</label>
+        <label><input type="radio" name="q2" value="Very Good"> Very Good</label>
+        <label><input type="radio" name="q2" value="Excellent"> Excellent</label>
+        <br><br>
+
+        <p>3. How well does the teacher clarify students' doubts?</p>
+        <label><input type="radio" name="q3" value="Average" required> Average</label>
+        <label><input type="radio" name="q3" value="Good"> Good</label>
+        <label><input type="radio" name="q3" value="Very Good"> Very Good</label>
+        <label><input type="radio" name="q3" value="Excellent"> Excellent</label>
+        <br><br>
+
+        <p>4. What teaching methods does the teacher use in class?</p>
+        <label><input type="radio" name="q4" value="Average" required> Average</label>
+        <label><input type="radio" name="q4" value="Good"> Good</label>
+        <label><input type="radio" name="q4" value="Very Good"> Very Good</label>
+        <label><input type="radio" name="q4" value="Excellent"> Excellent</label>
+        <br><br>
+
+        <p>5. How friendly and approachable is the teacher?</p>
+        <label><input type="radio" name="q5" value="Average" required> Average</label>
+        <label><input type="radio" name="q5" value="Good"> Good</label>
+        <label><input type="radio" name="q5" value="Very Good"> Very Good</label>
+        <label><input type="radio" name="q5" value="Excellent"> Excellent</label>
+        <br><br>
+
+        <label>Comments:</label><br>
+        <textarea name="comments" rows="3" placeholder="Write your feedback here..."></textarea><br><br>
+
+        <!-- Dynamic Button -->
+        <button type="submit" th:text="${isLast} ? 'Submit' : 'Next'"></button>
+    </form>
+
+   <script th:if="${popupMessage}">
+    alert([[${popupMessage}]]);
+</script>
+
+<script th:if="${showThankYou}">
+    alert("Thank you for your feedback!");
+    window.location.href = '/student/login';
+</script>
+   
+    
+</body>
+</html>

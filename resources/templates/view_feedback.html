@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Faculty Feedback Report</title>
+    
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #f7f7f7;
+      text-align: center;
+    }
+    canvas {
+      width: 70vw !important; /* 70% of screen width */
+      height: 60vh !important; /* 60% of screen height */
+      margin: 20px auto;
+      display: block;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Faculty Feedback Overview</h2>
+  <canvas id="feedbackChart"></canvas>
+
+  <button onclick="window.location.href='/admin/dashboard'">Back</button>
+
+  <script th:inline="javascript">
+    const chartData = /*[[${chartData}]]*/ [];
+
+    const labels = chartData.map(f => f.name);
+    const scores = chartData.map(f => f.score);
+
+    const colors = scores.map(score => {
+      if (score > 85) return 'green';
+      if (score > 70) return 'yellow';
+      if (score > 55) return 'orange';
+      return 'red';
+    });
+
+    new Chart(document.getElementById('feedbackChart'), {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Average Feedback (%)',
+          data: scores,
+          backgroundColor: colors,
+          borderWidth: 1,
+          barPercentage: 0.7,       // Adjust this (default ~0.9)
+          categoryPercentage: 0.6   // Adjust this (default ~0.8)
+        }]
+      },
+      options: {
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return context.label + ': ' + context.raw.toFixed(2) + '%';
+              }
+            }
+          },
+          legend: { display: false }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 100,
+            title: { display: true, text: 'Score (%)' },
+            grid: {
+                display: false}
+          },
+          
+          x: {
+            title: { display: true, text: 'Faculty' },
+            grid: {
+                display: false}
+           
+          }
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>

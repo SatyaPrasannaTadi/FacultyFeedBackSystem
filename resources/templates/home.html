@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Landing Page</title>
+  
+   <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+
+      /* ===== DIRECT ONLINE IMAGE (NO FILE NEEDED) ===== */
+      background-image: url('https://img.freepik.com/free-vector/gradient-international-day-education-background_23-2151120677.jpg');
+
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+    }
+
+    h1 {
+      font-size: 36px;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.8);
+    }
+
+    h3 {
+      font-size: 22px;
+      margin-bottom: 30px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+    }
+
+    .button-container {
+      display: flex;
+      gap: 20px;
+    }
+
+    a {
+      text-decoration: none;
+      color: white;
+      background-color: #007BFF;
+      padding: 12px 25px;
+      border-radius: 10px;
+      font-size: 18px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+
+    a:hover {
+      background-color: #0056b3;
+      transform: scale(1.05);
+    }
+
+    /* Dark overlay for clear text */
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: -1;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <h1>Welcome to Feedback System</h1>
+
+  <h3>Login As:</h3>
+
+  <div class="button-container">
+      <a href="/login">Admin Login</a>
+      <a href="/student/login">Student Login</a>
+  </div>
+
+</body>
+</html>

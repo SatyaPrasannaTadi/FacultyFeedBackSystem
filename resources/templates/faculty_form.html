@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Insert Faculty Data</title>
+ <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .form-container {
+      background: #fff;
+      padding: 20px 25px;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+      width: 330px;
+      text-align: center;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    h2 {
+      color: #2c3e50;
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+
+    label {
+      display: block;
+      text-align: left;
+      margin-bottom: 3px;
+      color: #34495e;
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    input {
+      width: 100%;
+      padding: 6px;
+      margin-bottom: 6px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+      font-size: 13px;
+    }
+
+    button {
+      width: 100%;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+      transition: 0.3s ease;
+      margin-top: 5px;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    .back-btn {
+      background-color: #7f8c8d;
+    }
+
+    .back-btn:hover {
+      background-color: #616A6B;
+    }
+
+    p {
+      color: green;
+      font-weight: 500;
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+ <div class="form-container">
+    <h2>Insert Faculty Data</h2>
+
+    <p th:if="${message}" th:text="${message}" style="color:green;"></p>
+
+    <form th:action="@{/faculty/save}" method="post" enctype="multipart/form-data">
+        <label>ID:</label>
+        <input type="text" name="id" pattern="FAC[0-9]{2}" title="Example: FAC01" required><br><br>
+
+        <label>Name:</label>
+        <input type="text" name="name" pattern="[A-Za-z ]+" title="Only alphabets allowed" required><br><br>
+
+        <label>Email:</label>
+        <input type="email" name="email" required><br><br>
+
+        <label>Mobile:</label>
+        <input type="text" name="mobile" pattern="[6-9][0-9]{9}" title="Enter valid mobile number" required><br><br>
+
+        <label>Branch:</label>
+        <input type="text" name="branch" pattern="[A-Za-z ]+" title="Only alphabets allowed" required><br><br>
+
+        <label>Subject:</label>
+        <input type="text" name="subject" pattern="[A-Za-z ]+" title="Only alphabets allowed" required><br><br>
+
+        <label>Password:</label>
+        <input type="password" name="password" required><br><br>
+
+        <label>Upload Passport Size Photo:</label>
+        <input type="file" name="image" accept="image/*" required><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+    
+    <br>
+
+<a href="/admin/dashboard"> Back to Dashboard</a>
+</div>
+</body>
+</html>

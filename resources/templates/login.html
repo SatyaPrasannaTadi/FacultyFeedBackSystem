@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Admin Login</title>
+  
+    <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #89f7fe, #66a6ff);
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .login-container {
+      background: white;
+      padding: 40px 50px;
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+      text-align: center;
+      width: 350px;
+    }
+
+    h2 {
+      margin-bottom: 25px;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      text-align: left;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #444;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: border-color 0.3s;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #007bff;
+    }
+
+    button {
+      width: 100%;
+      background-color: #007bff;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+      transform: scale(1.03);
+    }
+
+    p {
+      margin-top: 15px;
+      font-weight: 500;
+    }
+
+    .error {
+      color: red;
+    }
+
+    .success {
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+<h2>Admin Login</h2>
+
+<form th:action="@{/login}" method="post">
+  <label>Username:</label>
+  <input type="text" name="username" required><br><br>
+
+  <label>Password:</label>
+  <input type="password" name="password" required><br><br>
+
+  <button type="submit">Login</button>
+</form>
+
+<p style="color:red" th:if="${param.error}">Invalid username or password</p>
+<p style="color:green" th:if="${param.logout}">You have been logged out</p>
+</div>
+</body>
+</html>
