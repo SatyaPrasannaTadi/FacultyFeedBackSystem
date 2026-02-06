@@ -2,7 +2,7 @@
 
 ## 📌 Project Description
 
-Faculty Feedback System is a web-based application developed using Spring Boot, Thymeleaf, HTML, CSS, and MySQL.  
+Faculty Feedback System is a web-based application developed using Spring Boot, Java, Thymeleaf, HTML, CSS, and MySQL.  
 The system allows students to provide feedback for multiple faculty members, and the admin can analyze and view the feedback in graphical format.
 
 
